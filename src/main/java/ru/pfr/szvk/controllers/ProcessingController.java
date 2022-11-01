@@ -86,7 +86,7 @@ public class ProcessingController {
             throw new RuntimeException(e);
         }
         log.info("Соединение с базой устойчивое");
-        return "redirect:/";
+        return "redirect:/infosnils";
     }
 
 
