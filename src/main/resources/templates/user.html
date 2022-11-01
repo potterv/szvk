@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Coefficient
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20131117
+
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Портал SZVK предназначен для обработки СЗВ-К xml файлов.</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]>
+<link href="/css/default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<header th:insert="blocks/head::header"></header>
+
+<div class="container mt-0">
+	<p>Сотрудникам Отдела организации персонифицированного учета доступны:</p>
+	<ul>
+		<li>Загрузка файлов на сервер. </li>
+		<li>Запуск автоматической обработки загруженых xml файлов</li>
+		<li>Формирование xls Файла для Органов ФМС</li>
+		<li>Загрузка файлов xls полученых от органов ФМС</li>
+	</ul>
+	<p>Сотрудникам Группы оценки пенсионных прав застрахованных лиц:</p>
+	<ul>
+		<li>Просмотр информация о факте проживания в г. Севастополе на 18.03.2014</li>
+	</ul>
+
+
+</div>
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>

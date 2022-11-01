@@ -1,0 +1,16 @@
+/.git.old/
+/.idea/
+/db/
+/logs/
+/mail/
+/META-INF/
+/server_szvk/
+/target/
+*.xlsx
+*.MF
+*.csv
+*.log
+*.old
+*.xls
+*.txt
+*.iml
