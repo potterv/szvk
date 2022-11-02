@@ -108,6 +108,31 @@ public class Model {
     }
 
 
+    public List<Employee> getEmployeeListUUID(DbHandler dbHandler,String UUIDP){
+
+        LinkedHashMap param = new LinkedHashMap();
+        param.put("snils","");
+        param.put("uuid_P",UUIDP);
+        param.put("uuid_R","");
+        param.put("surname","");
+        param.put("name","");
+        param.put("patronymic","");
+        param.put("birthday","");
+        param.put("country","");
+        param.put("area","");
+        param.put("region","");
+        param.put("city","");
+        param.put("resident_crimea","");
+        param.put("commentary","");
+        param.put("DATE_LOAD_FILE_XML","");
+        param.put("DATE_LOAD_FILE_FROM_FMS_XLS","");
+        List<Employee> employees = new LinkedList<Employee>();
+        employees = dbHandler.getEmployees("view_for_ocenka","uuid_P",param);
+//        Collections.sort(employees);
+        return employees;
+    }
+
+
 //    public List<Employee> getAllEmployees(DbHandler dbHandler){
 //
 //        return  dbHandler.getAllEployees();
@@ -195,6 +220,41 @@ public class Model {
             param.put("city",row.getCity());
             param.put("date_load_file_from_fms_xls",LocalDate.now().toString());
             dbHandler.addData("ADRESS","uuid_R",param);
+            param.clear();
+        }
+        this.toArchiv(this.pathFromXlsToZip);
+        this.delete(this.pathFromXlsToZip);
+
+    }
+
+    /*
+
+     */
+    public void loadDataFromFmsCrimea(DbHandler dbHandler, List<AdrRowFromFms> rows) throws  SQLException {
+
+
+        LinkedHashMap param = new LinkedHashMap();
+
+
+        for (AdrRowFromFms row:rows) {
+
+////            param.put("snils",UUID.randomUUID().toString());
+            param.put("uuid_P",row.getUuidPachki());
+            param.put("uuid_R",row.getUuidRecord());
+            param.put("Resident_Crimea",row.isResidentCrimea());
+            param.put("commentary",row.getCommentary());
+            param.put("date_load_file_from_fms_xls",LocalDate.now().toString());
+            dbHandler.addData("FMS_DATA_CRIMEA","uuid_R",param);
+            param.clear();
+
+            param.put("uuid_P",row.getUuidPachki());
+            param.put("uuid_R",row.getUuidRecord());
+            param.put("country",row.getCountry());
+            param.put("area",row.getArea());
+            param.put("region",row.getRegion());
+            param.put("city",row.getCity());
+            param.put("date_load_file_from_fms_xls",LocalDate.now().toString());
+            dbHandler.addData("ADRESS_CRIMEA","uuid_R",param);
             param.clear();
         }
         this.toArchiv(this.pathFromXlsToZip);

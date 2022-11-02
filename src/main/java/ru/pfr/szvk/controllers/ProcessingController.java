@@ -85,7 +85,7 @@ public class ProcessingController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        log.info("Соединение с базой устойчивое");
+        log.info("Процесс переподключения к БД завершон");
         return "redirect:/infosnils";
     }
 
@@ -125,10 +125,12 @@ public class ProcessingController {
 
     @RequestMapping("/downloadPackage")
     public ResponseEntity<InputStreamResource> downloadPackage(
-            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName,@RequestParam("UUIDP") String UUIDP) throws IOException {
 //        this.dbHandler.getConnection();
+
+//        this.wraperM.getModel().getEmployeeList(this.dbHandler);
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        this.view=this.wraperM.setView(this.wraperM.getModel().getEmployeeList(this.dbHandler),this.wraperM.getModel().getXls());
+        this.view=this.wraperM.setView(this.wraperM.getModel().getEmployeeListUUID(this.dbHandler,UUIDP),this.wraperM.getModel().getXls());
         this.nameFile=this.view.getNameFileXls();
 
         fileName = this.nameFile;
@@ -190,6 +192,56 @@ public class ProcessingController {
 
         return "uploadformXls";
     }
+
+    /*
+    Загрузка данных от ФМС Крыма
+    */
+
+    @GetMapping("/uploadformXlsCrimea")
+    public String uploadformXlsCrimea() {
+        return "uploadformXlsCrimea";
+    }
+
+    @PostMapping("/uploadformXlsCrimea")
+    public String uploadMultipartFileXlsCrimea(@RequestParam("files") MultipartFile[] files, Model model) {
+        List<String> fileNames = null;
+        log.info("Загроузка файла от ФМС на сервер начата");
+        try {
+            fileNames = Arrays.asList(files)
+                    .stream()
+                    .map(file -> {
+                        fileStorage.store(file,"xls");
+                        return file.getOriginalFilename();
+                    })
+                    .collect(Collectors.toList());
+
+            model.addAttribute("message", "Files uploaded successfully!");
+            model.addAttribute("files", fileNames);
+            log.info("Загроузка файла от ФМС на сервер выполнена успешно");
+        } catch (Exception e) {
+            model.addAttribute("message", "Fail!");
+            model.addAttribute("files", fileNames);
+            log.info("Загроузка файлов на сервер не выполнена");
+        }
+        log.info("Загроузка файла от ФМС на сервер завершена");
+        this.dbHandler.getConnection();
+        try {
+//            this.dbHandler.setConnection();
+
+            this.wraperM.getModel().loadDataFromFmsCrimea(this.dbHandler, this.streamExcel.readFromXls(fileNames.get(0).toString()));
+            log.info("Данные из файла xls от ФМС загружены в базу");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            log.error(throwables.getMessage());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        return "uploadformXlsCrimea";
+    }
+
 
 
     @GetMapping("/infosnils")

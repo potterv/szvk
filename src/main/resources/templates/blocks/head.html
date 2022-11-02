@@ -5,10 +5,10 @@
             <div id="menu" class="container">
                 <ul>
                     <li class="current_page_item"><a th:href="@{/}" accesskey="1" title="">Главная</a></li>
+                    <li><a th:href="@{/reconnect}" accesskey="1" title="">Переподключиться к базе</a></li>
                     <li><a th:href="@{/downloadPackage}" accesskey="1" title="">Повторная выгрузка данных по UUID пакета </a></li>
 <!--                    <li><a th:href="@{/login}" accesskey="1" title="">Войти</a></li>-->
-<!--                    <li><a th:href="@{/logout}" accesskey="1" title="" class = "disabled" aria-disabled="true">Выход</a></li>-->
-                    <li><a th:href="@{/reconnect}" accesskey="1" title="">Переподключиться к базе</a></li>
+<!--                    <li><a th:href="@{/logout}" accesskey="1" title="" class = "disabled" aria-disabled="true">Выйти</a></li>-->
                     <li><a th:href="@{/about}" accesskey="1" title="">О проекте </a></li>
 <!--                    <li><a th:href="@{/getdate}" accesskey="1" title="">Обработать загруженные файлы</a></li>-->
 <!--                    <li><a th:href="@{/viewdata}" accesskey="1" title="">Вывести результат</a></li>-->
@@ -31,8 +31,8 @@
                 </div>
                 <br>
                 <img src="images/pic01.jpg" width="268" height="130" alt="" />
-                <p><a th:href="@{/download}"   rel="nofollow">Этап №3. Выполнить выгрузку xls - файла  для ФМС</a></p>
-                <p><a th:href="@{/downloadPackage}" accesskey="1" title="">Повторная выгрузка данных по UUID пакета </a></p>
+                <p><a th:href="@{/download}"   rel="nofollow">Этап №3.1. Выполнить первичную выгрузку данны</a> в xls - файла  для ФМС</p>
+                <p><a th:href="@{/downloadPackage}" accesskey="1" title="">Этап №3.2 Выполнить повторную выгрузку данных</a> в xls - файл для ФМС по UUID пакета</p>
 
             </div>
             <div class="column3">
@@ -41,7 +41,8 @@
                 </div>
                 <br>
                 <img src="images/pic02.jpg" width="268" height="130" alt="" />
-                <p><a th:href="@{/uploadformXls}"  rel="nofollow">Этап №4. Загрузка</a> полученого от ФМС файла на каком - либо носителе или по каналам связи</p>
+                <p><a th:href="@{/uploadformXls}"  rel="nofollow">Этап №4.1. Загрузка</a> полученого от Севастопольского ФМС, файла на каком - либо носителе или по каналам связи</p>
+                <p><a th:href="@{/uploadformXlsCrimea}"  rel="nofollow">Этап №4.2. Загрузка</a> полученого от Крымского ФМС, файла на каком - либо носителе или по каналам связи</p>
             </div>
             <div class="column4">
                 <div class="title">
