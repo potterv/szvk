@@ -76,7 +76,10 @@ Released   : 20131117
 		<label class="control-label" >Город:</label>
 			<span th:utext="${City}"></span>
 		<br/>
-    	<label class="control-label" >Признак резидентности на момент 18.03.2014:</label>
+    	<label class="control-label" >Признак резидентности на момент 18.03.2014 по данным ФМС Севастополя:</label>
+			<span th:utext="${ResidenceCrimea}"></span>
+		<br/>
+		<label class="control-label" >Признак резидентности на момент 18.03.2014 по данным ФМС Симферополя(Крыма):</label>
 			<span th:utext="${ResidenceCrimea}"></span>
 		<br/>
 		<label class="control-label" >Коментарий:</label>
@@ -108,5 +111,7 @@ Released   : 20131117
 
 
 <footer th:insert="blocks/footer::footer"></footer>
+<script src="js/jquery.maskedinput.min.js"></script>
+<script src="js/formatSnils.js"></script>
 </body>
 </html>
