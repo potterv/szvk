@@ -86,4 +86,9 @@ ul li a:hover::before {
     height: 100%;
     z-index: -1;
   }
+  test {
+      margin: 15% 0;
+      padding: 100px 50px 100px 50px;
+      text-align: center
+  }
 }
