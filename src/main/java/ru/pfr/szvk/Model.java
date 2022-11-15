@@ -23,7 +23,8 @@ public class Model {
     }
 
     public void readDataFromXmlToDb(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
-        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),"\\src\\main\\resources\\log4j.properties"));
+//        PropertyConfigurator.configure(String.join(File.separator,"src","main","resources","log4j.properties"));
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
 
         String pathD = this.pathFromToZip;
         log.info(String.join(" ", "Определен mail каталог", pathD));
@@ -149,10 +150,8 @@ public class Model {
     }
 
     public DbHandler getConnectDb()  {
-
-
         try {
-            log.info(String.join(" ", "Инициализирован класс  DbHandler, Выполнено подключение к базе"));
+            log.info(String.join(" ", "Инициализирован класс  DbHandler"));
             return DbHandler.getInstance();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -235,7 +234,7 @@ public class Model {
 
         LinkedHashMap param = new LinkedHashMap();
 
-
+        log.info("Добавляем информацию полученую от ФМС Крыма");
         for (AdrRowFromFms row:rows) {
 
 ////            param.put("snils",UUID.randomUUID().toString());
@@ -257,6 +256,7 @@ public class Model {
             dbHandler.addData("ADRESS_CRIMEA","uuid_R",param);
             param.clear();
         }
+        log.info("информация получена от ФМС Крыма добавлена");
         this.toArchiv(this.pathFromXlsToZip);
         this.delete(this.pathFromXlsToZip);
 

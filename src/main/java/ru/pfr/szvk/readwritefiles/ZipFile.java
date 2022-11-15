@@ -18,11 +18,12 @@ import java.util.zip.ZipInputStream;
 public class ZipFile implements TypeFile{
 
     public ZipFile(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
         this.pathD = new File("").getAbsolutePath();
 
     }
 
+    @Override
     public void getTypeFile(){
 
         System.out.println("тип файла zip");
@@ -79,7 +80,7 @@ public class ZipFile implements TypeFile{
             String name;
             long size;
 
-            final File dir1 = new File(String.join("",this.pathD,"\\in\\dir\\",fileName.substring(0,fileName.length()-4)));
+            final File dir1 = new File(String.join("",this.pathD,"/in/dir/",fileName.substring(0,fileName.length()-4)));
             if(!dir1.exists()) {
                 if(dir1.mkdir()) {
                     System.out.println("Kaтaлoг " + dir1.getAbsolutePath()+ " ycпeшнo coздaн.");

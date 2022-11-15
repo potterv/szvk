@@ -7,7 +7,7 @@ import java.io.File;
 
 public class DeleteSzvkFiles {
    public DeleteSzvkFiles(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
     }
 
     public void deleteFiles (String path){

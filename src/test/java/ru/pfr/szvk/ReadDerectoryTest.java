@@ -18,7 +18,7 @@ public class ReadDerectoryTest {
     public void getListFiles() {
 //        Тестовый  путь для проверки метода
 
-        String pathD = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
+        String pathD = String.join("",new File("").getAbsolutePath(),"/mail/inSZVK");
 //        System.out.println(pathD);
         ReadDerectory rf= ReadDerectory.getInstance();
 

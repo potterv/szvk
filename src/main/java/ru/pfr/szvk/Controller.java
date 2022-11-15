@@ -5,6 +5,7 @@ import org.apache.log4j.PropertyConfigurator;
 import ru.pfr.szvk.*;
 
 import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -15,7 +16,7 @@ public class Controller {
 
     public Controller() throws XMLStreamException, IOException, SQLException {
 
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
         log.info("Старт обработки");
         model = new Model();
         DbHandler dbHandler = model.getConnectDb();

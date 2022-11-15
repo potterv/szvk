@@ -24,9 +24,9 @@ import java.util.*;
 public class StreamExcel implements InterfaceExcel {
 
     public StreamExcel(){
-
-        PropertyConfigurator.configure(String.join(File.pathSeparator,"src","main","resources","log4j.properties"));
-        nameFileToFms = String.join("",new File("").getAbsolutePath(),"\\mail\\requests\\toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".xls");
+//        System.out.println(File.separator + "  " + "Разделитель каталогов");
+        PropertyConfigurator.configure(String.join(File.separator,"src","main","resources","log4j.properties"));
+        nameFileToFms = String.join("",new File("").getAbsolutePath(),"/mail/requests/toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".xls");
     }
 
     private HSSFCellStyle createStyleForTitle(HSSFWorkbook workbook) {
@@ -169,7 +169,7 @@ public class StreamExcel implements InterfaceExcel {
 
     @Override
     public List<AdrRowFromFms> readFromXls(String fileNameXlsFromFms) throws IOException {
-       log.info(toString().join("","Начата  загрузка данных из файла ",fileNameXlsFromFms," от ФМС"));
+       log.info(String.join("","Начата  загрузка данных из файла ",fileNameXlsFromFms," от ФМС"));
         List<Employee> employees =new LinkedList<Employee>();
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\response\\",fileNameXlsFromFms)));

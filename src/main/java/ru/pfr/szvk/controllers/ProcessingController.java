@@ -39,12 +39,17 @@ import java.util.stream.Collectors;
 @Controller
 public class ProcessingController {
     public ProcessingController(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
         this.wraperM = new WraperM();
         this.dbHandler = this.wraperM.getModel().getConnectDb();
-        log.info("Выполнена инициализация подключения к базе данных");
         this.dbHandler.setConnection();
-        log.info("Установка соединения с БД");
+        if (this.dbHandler.getConnection()!=null){
+            log.info("Установка соединения с БД - выполнена");
+            log.info("Выполнена инициализация подключения к базе данных");
+        }else {
+            log.info("Установка соединения с БД -  не выполнена");
+        }
+
     }
 
     @GetMapping("/processing")
@@ -70,24 +75,25 @@ public class ProcessingController {
         return "redirect:/";
     }
 
-    @GetMapping("/reconnect")
-    @PostMapping("/reconnect")
-    public String reConnectPost(Model model){
-        log.info("Начат процесс переподключение к  Базе");
-        try {
-            if (this.dbHandler.getConnection().isClosed() || this.dbHandler.getConnection().equals(null) || this.dbHandler.getConnection() == null ){
-                this.dbHandler.setConnection();
-                log.info("Переподключение к  Базе выполнено, т.к. ранее было разорвано соединение с Базой.");
-            }else{
-                log.info("Переподключение к  Базе не потребовалось т.к. соединение с базой установлено ранее");
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        log.info("Процесс переподключения к БД завершон");
-        return "redirect:/infosnils";
-    }
+    /**
+     *  Этот метод не нужен, так ка  переподключение к бд осуществляется планировщиком
+     */
+//    @GetMapping("/reconnect")
+//    @PostMapping("/reconnect")
+//    public String reConnectPost(Model model){
+//        log.info("Начат процесс переподключение к  Базе");
+//        if (this.dbHandler.getConnection() == null) {
+//            this.dbHandler.setConnection();
+//            log.info("Переподключение к  Базе выполнено, т.к. ранее было разорвано соединение с Базой.");
+//        }else{
+//                 log.info("Переподключение к  Базе не потребовалось т.к. соединение с базой установлено ранее и не разрывалось");
+//             }
+//
+//
+//
+//        log.info("Процесс переподключения к БД завершон");
+//        return "redirect:/infosnils";
+//    }
 
 
     private static final String DIRECTORY = "d:\\IdeaProject\\szvk_spring\\mail\\requests\\";

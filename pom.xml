@@ -12,8 +12,8 @@
   </parent>
 
   <groupId>ru.pfr.szvk</groupId>
-  <artifactId>szvk</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>szvk_test</artifactId>
+  <version>1.1-SNAPSHOT</version>
 <!--  <packaging>war</packaging>-->
 
   <name>szvk_web Maven Webapp</name>
@@ -241,7 +241,7 @@
 <!--  </build>-->
 
   <build>
-    <finalName>szvk</finalName>
+    <finalName>szvk_test</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

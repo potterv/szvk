@@ -5,6 +5,7 @@ import org.apache.log4j.PropertyConfigurator;
 import ru.pfr.szvk.controllers.ProcessingController;
 import ru.pfr.szvk.readwritefiles.xlsmodel.StreamExcel;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,7 +14,7 @@ public class WraperM {
    private Model model = new Model();
 
    public WraperM(){
-       PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+       PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
    }
     public Model getModel() {
 

@@ -197,13 +197,13 @@ hr {
 	text-align: center;
 	font-size: 14px;
 	font-weight: 150;
-	color: rgba(255,255,255,0.5);
+	color: rgba(255,255,255,0.8);
 	border: none;
 }
 
 #menu a:hover, #menu .current_page_item a {
 	text-decoration: none;
-	color: rgba(255,255,255,0.8);
+	color: rgba(255,255,255,2);
 }
 
 #menu .current_page_item a {
@@ -284,6 +284,8 @@ hr {
 	padding-right: 1px;
 	border-right: 1px solid #E6E7DC;
 }
+
+
 
 #content .post-title
 {

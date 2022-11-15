@@ -29,7 +29,7 @@ public class StaxStreamProcessorTest {
     @Test
     public void readXml() throws IOException, XMLStreamException {
 
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
         String pathD = "".join("",new File("").getAbsolutePath(),"/mail/inSZVK") ;
 
         ReadDerectory rf= ReadDerectory.getInstance();
@@ -67,8 +67,8 @@ public class StaxStreamProcessorTest {
 
     @Test
     public void read_policyholder(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
-        String pathD = "".join("",new File("").getAbsolutePath(),"\\mail\\inSZVK") ;
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
+        String pathD = "".join("",new File("").getAbsolutePath(),"/mail/inSZVK") ;
 //        System.out.println(pathD);
         ReadDerectory rf= ReadDerectory.getInstance();
 

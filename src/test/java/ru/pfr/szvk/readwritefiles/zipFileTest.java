@@ -16,7 +16,7 @@ class zipFileTest {
 
     @Test
     void write()  {
-     String pathD = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
+     String pathD = String.join("",new File("").getAbsolutePath(),"/mail/inSZVK");
      ZipFile zf = new ZipFile();
      zf.write(pathD, UUID.randomUUID().toString());
 

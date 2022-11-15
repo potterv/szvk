@@ -6,6 +6,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import ru.pfr.szvk.db.dbConfig;
 //import org.sqlite.JDBC;
+import java.io.File;
 import java.sql.Statement;
 
 import java.time.LocalDate;
@@ -27,8 +28,9 @@ public class DbHandler {
     private static DbHandler instance = null;
 
     public static synchronized DbHandler getInstance() throws SQLException {
-        if (instance == null)
+        if (instance == null) {
             instance = new DbHandler();
+        }
         return instance;
     }
 
@@ -70,7 +72,7 @@ public class DbHandler {
      */
 
     private DbHandler() throws SQLException {
-        PropertyConfigurator.configure("src/main/resources/log4j.properties");
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
         this.jdbcClassName = config.getJdbcClassName();
         this.url = config.getUrl();
         this.user = config.getUser();
@@ -168,7 +170,7 @@ public class DbHandler {
         String calls = param.keySet().toString().replaceAll("\\[", " ").replaceAll("]", " ");
         String vallColl = param.get(nameColl).toString();
 
-        String sql = "".join("",
+        String sql = String.join("",
                 "SELECT ", calls,
                 " FROM db2admin.", nameTable, " WHERE ", nameColl, "=?");
 
@@ -256,7 +258,7 @@ public class DbHandler {
 
         String vallColl = param.get(nameColl).toString();
         log.info(String.join("", "В xls файл выгружен пакет ", vallColl));
-        String sql = "".join("",
+        String sql = String.join("",
                 "SELECT distinct ", calls,
                 " FROM db2admin.", nameTable, " WHERE ", nameColl, "=? order by surname");
 
@@ -388,7 +390,7 @@ public class DbHandler {
     public void addData(String nameTable, String keyControl, LinkedHashMap nameColls) throws SQLException {
         StringBuffer volue = new StringBuffer();
 
-        try (PreparedStatement statement = this.connection.prepareStatement("".join("", "SELECT  distinct ", keyControl, ", UUID_R", " FROM db2admin.", nameTable, " Where ", keyControl, " =?"))) {
+        try (PreparedStatement statement = this.connection.prepareStatement(String.join("", "SELECT  distinct ", keyControl, ", UUID_R", " FROM db2admin.", nameTable, " Where ", keyControl, " =?"))) {
 
             statement.setObject(1, nameColls.get(keyControl).toString());
             ResultSet resultSet = statement.executeQuery();
@@ -401,7 +403,7 @@ public class DbHandler {
                         volue.append(",");
                     }
                 }
-                try (PreparedStatement statement1 = this.connection.prepareStatement("".join(" ",
+                try (PreparedStatement statement1 = this.connection.prepareStatement(String.join(" ",
                         "INSERT INTO db2admin.",
                         nameTable,
                         nameColls.keySet().toString().replaceAll("\\[", "(").replaceAll("]", ")"),
@@ -414,7 +416,7 @@ public class DbHandler {
                         statement1.setObject(countValue + 1, nameColls.values().toArray()[countValue].toString());
                     }
                     statement1.executeUpdate();
-                    log.info("".join("", "В таблицу ", nameTable, " добавлена запись с uuid ", nameColls.get("uuid_R").toString()));
+                    log.info(String.join("", "В таблицу ", nameTable, " добавлена запись с uuid ", nameColls.get("uuid_R").toString()));
 
 
                 } catch (Exception e) {
@@ -422,16 +424,16 @@ public class DbHandler {
                     log.error(e.getMessage());
                     log.error(e.getStackTrace().toString());
 
-                    log.info("".join("", "В таблицу ", nameTable, " не добавлена запись с uuid ", nameColls.get("uuid_R").toString()));
+                    log.info(String.join("", "В таблицу ", nameTable, " не добавлена запись с uuid ", nameColls.get("uuid_R").toString()));
 
                 }
             } else {
 
                 if (keyControl.equals("snils")) {
 
-                    log.warn("".join(" ", "Запись с ", " UUID_R = ", resultSet.getString("UUID_R"), " СНИЛС - ", nameColls.get(keyControl).toString(), " существует в базе и  не будет добавлена в таблицу", nameTable));
+                    log.warn(String.join(" ", "Запись с ", " UUID_R = ", resultSet.getString("UUID_R"), " СНИЛС - ", nameColls.get(keyControl).toString(), " существует в базе и  не будет добавлена в таблицу", nameTable));
                 } else {
-                    log.warn("".join(" ", "Запись с ", " UUID_R = ", resultSet.getString("UUID_R"), "  не будет добавлена в таблицу", nameTable));
+                    log.warn(String.join(" ", "Запись с ", " UUID_R = ", resultSet.getString("UUID_R"), "  не будет добавлена в таблицу", nameTable));
                 }
 
             }

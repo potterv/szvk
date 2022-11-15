@@ -30,7 +30,7 @@ public class DbHandlerTest {
     @Before
     public void outXml() throws IOException, XMLStreamException {
         PropertyConfigurator.configure("src/main/resources/log4j.properties");
-        String pathD = "".join("", new File("").getAbsolutePath(),"\\mail\\inSZVK") ;
+        String pathD = "".join("", new File("").getAbsolutePath(),"/mail/inSZVK") ;
 
         ReadDerectory rf= ReadDerectory.getInstance();
 

@@ -1,5 +1,6 @@
 package ru.pfr.szvk.controllers;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ import ru.pfr.szvk.storage.FileStorage;
 public class UploadFileController {
 
     public UploadFileController(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
     }
 
     @Autowired
