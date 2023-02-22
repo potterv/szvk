@@ -13,8 +13,8 @@ import java.util.Date;
 public class CsvWriter {
     public void saveCsv(List<Employee> employees) {
 
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
-        try (PrintWriter writer = new PrintWriter(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\requests\\toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".csv")))) {
+        PropertyConfigurator.configure(String.join("","src",File.separator,"main",File.separator,"resources",File.separator,"log4j.properties"));
+        try (PrintWriter writer = new PrintWriter(new File(String.join("",new File("").getAbsolutePath(),File.separator,"mail",File.separator,"requests",File.separator,"toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".csv")))) {
             log.info("Файл csv создан. Начата запись в файл");
             StringBuilder sb = new StringBuilder();
 //            sb.append("namepolicyholdershort");

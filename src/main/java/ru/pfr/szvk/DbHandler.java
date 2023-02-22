@@ -30,6 +30,7 @@ public class DbHandler {
     public static synchronized DbHandler getInstance() throws SQLException {
         if (instance == null) {
             instance = new DbHandler();
+            log.info(String.join(" ", "Инициализирован класс  DbHandler ",instance.toString()));
         }
         return instance;
     }
@@ -38,6 +39,7 @@ public class DbHandler {
     private Connection connection;
 
     public Connection getConnection() {
+
         return this.connection;
     }
 
@@ -217,7 +219,7 @@ public class DbHandler {
                         new StringBuffer(city)).Builder();
 
             } else {
-                log.warn("".join(" ", param.get(nameColl).toString(), " в базе данный снилс не найден"));
+                log.warn(String.join(" ", param.get(nameColl).toString(), " в базе данный снилс не найден"));
                 return new Employee.Builder(new StringBuffer(param.get(nameColl).toString())).getPFR(
                         new StringBuffer("-"),
                         new StringBuffer("-"),
@@ -393,6 +395,8 @@ public class DbHandler {
         try (PreparedStatement statement = this.connection.prepareStatement(String.join("", "SELECT  distinct ", keyControl, ", UUID_R", " FROM db2admin.", nameTable, " Where ", keyControl, " =?"))) {
 
             statement.setObject(1, nameColls.get(keyControl).toString());
+            log.info(String.join(""," param ",nameColls.get("uuid_R").toString()));
+            log.info(String.join("", "SELECT  distinct ", keyControl, ", UUID_R", " FROM db2admin.", nameTable, " Where ", keyControl, " = ",nameColls.get(keyControl).toString()));
             ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
@@ -403,24 +407,50 @@ public class DbHandler {
                         volue.append(",");
                     }
                 }
-                try (PreparedStatement statement1 = this.connection.prepareStatement(String.join(" ",
+                try (PreparedStatement statement1 = this.connection.prepareStatement(String.join("",
                         "INSERT INTO db2admin.",
-                        nameTable,
+                        nameTable," ",
                         nameColls.keySet().toString().replaceAll("\\[", "(").replaceAll("]", ")"),
-                        "VALUES (",
+                        " ",
+                        "VALUES ( ",
                         volue,
                         ")"
 
                 ))) {
+
+
+
                     for (int countValue = 0; countValue < nameColls.size(); countValue++) {
                         statement1.setObject(countValue + 1, nameColls.values().toArray()[countValue].toString());
+                    log.info(String.join("","param imput  ",Integer.toString(countValue + 1)," ", nameColls.values().toArray()[countValue].toString()));
                     }
+                    log.info(String.join(""," INSERT sql start = ",
+                            String.join("",
+                                    "INSERT INTO db2admin.",
+                                    nameTable," ",
+                                    nameColls.keySet().toString().replaceAll("\\[", "(").replaceAll("]", ")"),
+                                    " ",
+                                    "VALUES ( ",
+                                    volue,
+                                    ")"
+
+                            )));
                     statement1.executeUpdate();
                     log.info(String.join("", "В таблицу ", nameTable, " добавлена запись с uuid ", nameColls.get("uuid_R").toString()));
 
 
                 } catch (Exception e) {
+                    log.info(String.join(""," INSERT sql start = ",
+                            String.join("",
+                                    "INSERT INTO db2admin.",
+                                    nameTable," ",
+                                    nameColls.keySet().toString().replaceAll("\\[", "(").replaceAll("]", ")"),
+                                    " ",
+                                    "VALUES ( ",
+                                    volue,
+                                    ")"
 
+                            )));
                     log.error(e.getMessage());
                     log.error(e.getStackTrace().toString());
 

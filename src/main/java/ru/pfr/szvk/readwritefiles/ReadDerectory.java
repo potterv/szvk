@@ -16,7 +16,7 @@ import java.util.*;
 public class ReadDerectory {
     private static ReadDerectory instance = null;
     private ReadDerectory(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("","src",File.separator,"main",File.separator,"resources",File.separator,"log4j.properties"));
     }
     public static ReadDerectory getInstance(){
         if (instance==null){

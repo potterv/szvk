@@ -2,13 +2,13 @@ package ru.pfr.szvk.readwritefiles;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.tomcat.jni.File;
 import ru.pfr.szvk.Employee;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -39,7 +39,7 @@ public class StaxStreamProcessor {
 //
 //    }
     public StaxStreamProcessor(){
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("","src", File.separator,"main",File.separator,"resources",File.separator,"log4j.properties"));
         this.uuidPachka=UUID.randomUUID().toString();
     }
 

@@ -1,5 +1,6 @@
 package ru.pfr.szvk.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -20,10 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileStorageImpl implements FileStorage{
 
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
-    private final Path rootLocation = Paths.get("mail\\");
+    private final Path rootLocation = Paths.get(String.join("","mail",File.separator));
     private enum TypeFile { xml,xls }
-    private String pathIn="inSZVK\\";
-    private String pathResponse="response\\";
+    private String pathIn=String.join("","inSZVK", File.separator);
+    private String pathResponse=String.join("","response",File.separator);
     @Override
     public void store(MultipartFile file,String fileType){
         try {

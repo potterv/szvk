@@ -172,7 +172,7 @@ public class StreamExcel implements InterfaceExcel {
        log.info(String.join("","Начата  загрузка данных из файла ",fileNameXlsFromFms," от ФМС"));
         List<Employee> employees =new LinkedList<Employee>();
         // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\response\\",fileNameXlsFromFms)));
+        FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),File.separator,"mail",File.separator,"response",File.separator,fileNameXlsFromFms)));
 //        FileInputStream inputStream = new FileInputStream(new File(fileNameXlsFromFms));
 
         // Get the workbook instance for XLS file

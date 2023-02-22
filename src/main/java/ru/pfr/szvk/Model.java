@@ -19,7 +19,7 @@ import java.util.*;
 
 public class Model {
     public Model(){
-
+        log.info(String.join(" ", " ------------------------- Приложение SZVK запущено -----------------------"));
     }
 
     public void readDataFromXmlToDb(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
@@ -149,15 +149,11 @@ public class Model {
         return new StreamExcel();
     }
 
-    public DbHandler getConnectDb()  {
-        try {
-            log.info(String.join(" ", "Инициализирован класс  DbHandler"));
-            return DbHandler.getInstance();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+    public DbHandler getConnectDb() throws SQLException {
+
+      return DbHandler.getInstance();
     }
+
     public void setConnectionDB(){
         try {
             DbHandler.getInstance();
@@ -277,8 +273,8 @@ public class Model {
         return pathFromToZip;
     }
 
-    private String pathFromToZip = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
-    private String pathFromXlsToZip = String.join("",new File("").getAbsolutePath(),"\\mail\\response");
+    private String pathFromToZip = String.join("",new File("").getAbsolutePath(),File.separator,"mail",File.separator,"inSZVK");
+    private String pathFromXlsToZip = String.join("",new File("").getAbsolutePath(),File.separator,"mail",File.separator,"response");
     private String uuidPachki;
     private static final Logger log = Logger.getLogger(Model.class);
 }
