@@ -19,7 +19,6 @@ import ru.pfr.szvk.Employee;
 import ru.pfr.szvk.MediaType.MediaTypeUtils;
 import ru.pfr.szvk.View;
 import ru.pfr.szvk.WraperM;
-import ru.pfr.szvk.readwritefiles.ReadDerectory;
 import ru.pfr.szvk.readwritefiles.xlsmodel.StreamExcel;
 import ru.pfr.szvk.storage.FileStorage;
 
@@ -41,7 +40,11 @@ public class ProcessingController {
     public ProcessingController(){
         PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),String.join(File.separator,File.separator,"src","main","resources","log4j.properties")));
         this.wraperM = new WraperM();
-        this.dbHandler = this.wraperM.getModel().getConnectDb();
+        try {
+            this.dbHandler = this.wraperM.getModel().getConnectDb();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.dbHandler.setConnection();
         if (this.dbHandler.getConnection()!=null){
             log.info("Установка соединения с БД - выполнена");
@@ -76,24 +79,25 @@ public class ProcessingController {
     }
 
     /**
-     *  Этот метод не нужен, так ка  переподключение к бд осуществляется планировщиком
+     *  Этот метод ненужный, так ка  переподключение к бд осуществляется планировщиком
+     *  используется для тестирования
      */
-//    @GetMapping("/reconnect")
-//    @PostMapping("/reconnect")
-//    public String reConnectPost(Model model){
-//        log.info("Начат процесс переподключение к  Базе");
-//        if (this.dbHandler.getConnection() == null) {
-//            this.dbHandler.setConnection();
-//            log.info("Переподключение к  Базе выполнено, т.к. ранее было разорвано соединение с Базой.");
-//        }else{
-//                 log.info("Переподключение к  Базе не потребовалось т.к. соединение с базой установлено ранее и не разрывалось");
-//             }
-//
-//
-//
-//        log.info("Процесс переподключения к БД завершон");
-//        return "redirect:/infosnils";
-//    }
+    @GetMapping("/reconnect")
+    @PostMapping("/reconnect")
+    public String reConnectPost(Model model){
+        log.info("Начат процесс переподключение к  Базе");
+            this.dbHandler.setConnection();
+            log.info("Переподключение к  Базе выполнено, т.к. ранее было разорвано соединение с Базой.");
+
+//            log.info(String.join(" ","Переподключение к  Базе не потребовалось т.к. соединение с базой установлено ранее и не разрывалось ",this.dbHandler.getConnection().toString()) );
+            if (this.dbHandler.getConnection().equals(null)){
+                log.info("Is not connection "+ this.dbHandler.getConnection().toString());
+            }else {
+                log.info("It is connection "+this.dbHandler.getConnection().toString());
+            }
+        log.info("Процесс переподключения к БД завершон");
+        return "redirect:/infosnils";
+    }
 
 
     private static final String DIRECTORY = "d:\\IdeaProject\\szvk_spring\\mail\\requests\\";
@@ -183,8 +187,6 @@ public class ProcessingController {
         log.info("Загроузка файла от ФМС на сервер завершена");
         this.dbHandler.getConnection();
         try {
-//            this.dbHandler.setConnection();
-
             this.wraperM.getModel().loadDataFromFms(this.dbHandler, this.streamExcel.readFromXls(fileNames.get(0).toString()));
             log.info("Данные из файла xls от ФМС загружены в базу");
         } catch (SQLException throwables) {
@@ -210,8 +212,10 @@ public class ProcessingController {
 
     @PostMapping("/uploadformXlsCrimea")
     public String uploadMultipartFileXlsCrimea(@RequestParam("files") MultipartFile[] files, Model model) {
-        List<String> fileNames = null;
+       String fileNames = null;
+
         log.info("Загроузка файла от ФМС на сервер начата");
+
         try {
             fileNames = Arrays.asList(files)
                     .stream()
@@ -219,8 +223,9 @@ public class ProcessingController {
                         fileStorage.store(file,"xls");
                         return file.getOriginalFilename();
                     })
-                    .collect(Collectors.toList());
-
+                    .collect(Collectors.toList())
+                    .get(0);
+            log.info(String.join("","filename ",fileNames));
             model.addAttribute("message", "Files uploaded successfully!");
             model.addAttribute("files", fileNames);
             log.info("Загроузка файла от ФМС на сервер выполнена успешно");
@@ -232,9 +237,7 @@ public class ProcessingController {
         log.info("Загроузка файла от ФМС на сервер завершена");
         this.dbHandler.getConnection();
         try {
-//            this.dbHandler.setConnection();
-
-            this.wraperM.getModel().loadDataFromFmsCrimea(this.dbHandler, this.streamExcel.readFromXls(fileNames.get(0).toString()));
+            this.wraperM.getModel().loadDataFromFmsCrimea(this.dbHandler, this.streamExcel.readFromXls(fileNames));
             log.info("Данные из файла xls от ФМС загружены в базу");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
