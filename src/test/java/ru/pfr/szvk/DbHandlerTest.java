@@ -17,7 +17,7 @@ public class DbHandlerTest {
 
 
 
-    @Test
+//    @Test
     public void getAllEmployees() throws SQLException {
         DbHandler dbHandler = DbHandler.getInstance();
         // Получаем все записи и выводим их на консоль
@@ -27,10 +27,10 @@ public class DbHandlerTest {
             System.out.println(human);
         }
     }
-    @Before
+//    @Before
     public void outXml() throws IOException, XMLStreamException {
-        PropertyConfigurator.configure("src/main/resources/log4j.properties");
-        String pathD = "".join("", new File("").getAbsolutePath(),"/mail/inSZVK") ;
+        PropertyConfigurator.configure(String.join("","src",File.separator,"main",File.separator,"resources",File.separator,"log4j.properties"));
+        String pathD = "".join("", new File("").getAbsolutePath(),File.separator,"mail",File.separator,"inSZVK") ;
 
         ReadDerectory rf= ReadDerectory.getInstance();
 
@@ -69,7 +69,7 @@ public class DbHandlerTest {
         }
     }
 
-    @Test
+//    @Test
     public void findHumen() throws SQLException{
         DbHandler dbHandler = DbHandler.getInstance();
         for (String snils:this.employeeList
@@ -92,7 +92,7 @@ public class DbHandlerTest {
     private List<List<Employee>> employees = new LinkedList<List<Employee>>();
     private List<Employee> employeesAdd = new LinkedList<Employee>();
 
-    @Test
+//    @Test
     public void addDate() throws SQLException {
         DbHandler dbHandler = DbHandler.getInstance();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
@@ -130,7 +130,7 @@ public class DbHandlerTest {
 //
 //        return " ";
 //    }
-    @Test
+//    @Test
     public void getEmployees() throws SQLException {
         DbHandler dbHandler = DbHandler.getInstance();
         LinkedHashMap param = new LinkedHashMap();

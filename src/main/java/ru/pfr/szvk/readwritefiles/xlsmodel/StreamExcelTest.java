@@ -1,6 +1,7 @@
 package ru.pfr.szvk.readwritefiles.xlsmodel;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 import ru.pfr.szvk.Employee;
 
 import java.io.IOException;

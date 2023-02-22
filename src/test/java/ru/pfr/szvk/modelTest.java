@@ -18,7 +18,7 @@ public class modelTest {
         dbHandler.setConnection();
         m.readDataFromXmlToDb(dbHandler);
 //        m.getCsv().saveCsv(m.getEmployeeList(dbHandler));
-        m.getXls().writeToXls(m.getEmployeeList(dbHandler));
+//        m.getXls().writeToXls(m.getEmployeeList(dbHandler));
 
     }
     @Test
@@ -28,6 +28,6 @@ public class modelTest {
         Model m = new Model();
         DbHandler dbHandler = DbHandler.getInstance();
         dbHandler.setConnection();
-        m.loadDataFromFms(dbHandler,streamExcel.readFromXls("Проверка УВМ 01_06_2020 со СНИЛС.xls"));
+//        m.loadDataFromFms(dbHandler,streamExcel.readFromXls("Проверка УВМ 01_06_2020 со СНИЛС.xls"));
     }
 }

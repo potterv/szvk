@@ -1,9 +1,7 @@
 package ru.pfr.szvk;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 import ru.pfr.szvk.readwritefiles.ReadDerectory;
 import ru.pfr.szvk.readwritefiles.StaxStreamProcessor;
@@ -16,7 +14,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+
 
 public class StaxStreamProcessorTest {
 
@@ -29,8 +27,8 @@ public class StaxStreamProcessorTest {
     @Test
     public void readXml() throws IOException, XMLStreamException {
 
-        PropertyConfigurator.configure("src/main/resources/log4j.properties");
-        String pathD = "".join("",new File("").getAbsolutePath(),"/mail/inSZVK") ;
+        PropertyConfigurator.configure(String.join("","src",File.separator,"main",File.separator,"resources",File.separator,"log4j.properties"));
+        String pathD = String.join("",new File("").getAbsolutePath(),File.separator,"mail",File.separator,"inSZVK") ;
 
         ReadDerectory rf= ReadDerectory.getInstance();
 
@@ -68,7 +66,7 @@ public class StaxStreamProcessorTest {
     @Test
     public void read_policyholder(){
         PropertyConfigurator.configure("src/main/resources/log4j.properties");
-        String pathD = "".join("",new File("").getAbsolutePath(),"/mail/inSZVK") ;
+        String pathD = String.join("",new File("").getAbsolutePath(),"/mail/inSZVK") ;
 //        System.out.println(pathD);
         ReadDerectory rf= ReadDerectory.getInstance();
 
@@ -127,11 +125,11 @@ public class StaxStreamProcessorTest {
                 snils.setIm(employee.getName().toString());
                 snils.setOt(employee.getPatronymic().toString());
 
-//                System.out.println(snils);
+
 
                 itog = String.join(";",policyholder.getRegNum(),policyholder.getName(),snils.getSnils(),snils.getSurname(),snils.getIm(),snils.getOt(),"\n");
                 writer.append(itog.toString());
-//                        write(shapka.toString());
+
 
 
                 System.out.println(itog);
