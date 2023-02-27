@@ -53,8 +53,17 @@ public class Employee implements Comparable<Employee>{
     public boolean getResidenceCrimea(){
         return this.residenceCrimea;
     }
+
+    public boolean getResidenceCrimeaSimf() {
+        return residenceCrimeaSimf;
+    }
+
     public StringBuffer getCommentary(){
         return this.commentary;
+    }
+
+    public StringBuffer getCommentarySimf() {
+        return commentarySimf;
     }
 
     public StringBuffer getCountry() {
@@ -98,12 +107,21 @@ public class Employee implements Comparable<Employee>{
     public void setResidenceCrimea(StringBuffer valResidenceCrimea ) {
         this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
     }
+
+    public void setResidenceCrimeaSimf(StringBuffer valResidenceCrimeaSimf) {
+        this.residenceCrimeaSimf = Boolean.parseBoolean(new StringBuffer(valResidenceCrimeaSimf).toString());
+    }
+
     public StringBuffer getDateLoadFileXml(){
         return  this.dateLoadFileXml;
     }
 
     public StringBuffer getDateLoadFileFromFfmsXls(){
         return this.dateLoadFileFromFfmsXls;
+    }
+
+    public StringBuffer getDateLoadFileFromFfmsXlsSimf() {
+        return this.dateLoadFileFromFfmsXlsSimf;
     }
 
     private Employee(Builder builder) {
@@ -114,6 +132,7 @@ public class Employee implements Comparable<Employee>{
         this.name = builder.name;
         this.patronymic = builder.patronymic;
         this.residenceCrimea = builder.residenceCrimea;
+        this.residenceCrimeaSimf = builder.residenceCrimeaSimf;
         this.birthday = builder.birthday;
         this.country = builder.country;
         this.area = builder.area;
@@ -122,8 +141,10 @@ public class Employee implements Comparable<Employee>{
         this.namepolicyholdershort = builder.namepolicyholdershort;
         this.regnumber = builder.regnumber;
         this.commentary = builder.commentary;
+        this.commentarySimf = builder.commentarySimf;
         this.dateLoadFileXml = builder.dateLoadFileXml;
         this.dateLoadFileFromFfmsXls = builder.dateLoadFileFromFfmsXls;
+        this.dateLoadFileFromFfmsXlsSimf = builder.dateLoadFileFromFfmsXlsSimf;
     }
 // Реализация метода сравнения интерфейса Comparable для сортировки списка по полю surname, в алфавитном порядке
     @Override
@@ -238,8 +259,11 @@ public class Employee implements Comparable<Employee>{
                                         StringBuffer valCity,
                                         StringBuffer valResidenceCrimea,
                                         StringBuffer commentary,
+                                        StringBuffer valResidenceCrimeaSimf,
+                                        StringBuffer commentarySimf,
                                         StringBuffer dateLoadFileXml,
-                                        StringBuffer dateLoadFileFromFfmsXls){
+                                        StringBuffer dateLoadFileFromFfmsXls,
+                                        StringBuffer dateLoadFileFromFfmsXlsSimf){
 //
 
             this.uuidPachka=valUuidPachka;
@@ -254,8 +278,11 @@ public class Employee implements Comparable<Employee>{
             this.city = valCity;
             this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
             this.commentary= commentary;
+            this.residenceCrimeaSimf = Boolean.parseBoolean(new StringBuffer(valResidenceCrimeaSimf).toString());
+            this.commentarySimf = commentarySimf;
             this.dateLoadFileXml =dateLoadFileXml;
             this.dateLoadFileFromFfmsXls=dateLoadFileFromFfmsXls;
+            this.dateLoadFileFromFfmsXlsSimf=dateLoadFileFromFfmsXlsSimf;
 
             return this;
         }
@@ -294,11 +321,16 @@ public class Employee implements Comparable<Employee>{
         private StringBuffer numberInsured;
         private StringBuffer nameInsured;
         private boolean residenceCrimea;
+
+        private boolean residenceCrimeaSimf;
         private StringBuffer  namepolicyholdershort;
         private StringBuffer regnumber;
         private StringBuffer commentary;
+        private StringBuffer commentarySimf;
         private StringBuffer dateLoadFileXml;
         private StringBuffer dateLoadFileFromFfmsXls;
+
+        private StringBuffer dateLoadFileFromFfmsXlsSimf;
         private StringBuffer inn;
         private StringBuffer kpp;
 
@@ -321,11 +353,18 @@ public class Employee implements Comparable<Employee>{
     private StringBuffer numberInsured;
     private StringBuffer nameInsured;
     private boolean residenceCrimea;
+
+    private boolean residenceCrimeaSimf;
     private StringBuffer  namepolicyholdershort;
     private StringBuffer regnumber;
     private StringBuffer commentary;
+
+    private StringBuffer commentarySimf;
     private StringBuffer dateLoadFileXml;
     private StringBuffer dateLoadFileFromFfmsXls;
+
+    private StringBuffer dateLoadFileFromFfmsXlsSimf;
     private StringBuffer inn;
     private StringBuffer kpp;
+
 }

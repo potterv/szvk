@@ -293,7 +293,7 @@ public class ProcessingController {
             model.addAttribute("Area", this.employees.get(0).getArea());
             model.addAttribute("Region", this.employees.get(0).getRegion());
             model.addAttribute("City", this.employees.get(0).getCity());
-
+// резидентность по данным Севастопольского ФМС
             if (this.employees.get(0).getDateLoadFileFromFfmsXls().toString().equals("-")){
 
                 model.addAttribute("ResidenceCrimea", "");
@@ -307,8 +307,24 @@ public class ProcessingController {
                 }
             }
 
+            // резидентность по данным Крымского ФМС
+            if (this.employees.get(0).getDateLoadFileFromFfmsXlsSimf().toString().equals("-")){
+
+                model.addAttribute("ResidenceCrimeaSimf", "");
+
+            }else{
+                if (this.employees.get(0).getResidenceCrimeaSimf()){
+
+                    model.addAttribute("ResidenceCrimeaSimf", "да");
+                }else {
+                    model.addAttribute("ResidenceCrimeaSimf", "нет");
+                }
+            }
+
 
             model.addAttribute("Commentary", this.employees.get(0).getCommentary());
+
+            model.addAttribute("CommentarySimf", this.employees.get(0).getCommentarySimf());
 
             if (this.employees.get(0).getDateLoadFileXml().toString().equals("-")){
                 model.addAttribute("dateLoadFileXml","Запрос в ФМС еще не направлялся");
@@ -319,9 +335,14 @@ public class ProcessingController {
             if (this.employees.get(0).getDateLoadFileFromFfmsXls().toString().equals("-")){
                 model.addAttribute("dateLoadFileFromFfmsXls","Ответ от ФМС еще не получен");
             }else {
-                model.addAttribute("dateLoadFileFromFfmsXls",String.join("","Статус на: ",this.employees.get(0).getDateLoadFileFromFfmsXls().toString()," получен ответ от ФМС"));
+                model.addAttribute("dateLoadFileFromFfmsXls",String.join("","Статус на: ",this.employees.get(0).getDateLoadFileFromFfmsXls().toString()," получен ответ от ФМС Севастополь"));
             }
 
+            if (this.employees.get(0).getDateLoadFileFromFfmsXlsSimf().toString().equals("-")){
+                model.addAttribute("dateLoadFileFromFfmsXlsSimf","Ответ от ФМС Крыма еще не получен");
+            }else {
+                model.addAttribute("dateLoadFileFromFfmsXlsSimf",String.join("","Статус на: ",this.employees.get(0).getDateLoadFileFromFfmsXlsSimf().toString()," получен ответ от ФМС Крым"));
+            }
 
 
             }

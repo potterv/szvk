@@ -251,8 +251,11 @@ public class DbHandler {
         String birthday = "-";
         String rescrimea = "-";
         String comentary = "-";
+        String rescrimeaSimf = "-";
+        String comentarySimf = "-";
         String dateLoadFileXml = "-";
         String dateLoadFileFromFfmsXls = "-";
+        String dateLoadFileFromFfmsXlsSimf = "-";
 
         log.info(" таблица с которой работаем " + nameTable);
 
@@ -313,7 +316,7 @@ public class DbHandler {
                 }
 
 //
-                if (nameTable.equals("view_for_ocenka")) {
+                if (nameTable.equals("view_for_ocenka_with_simf")) {
 
                     rescrimea = resultSet.getString(nameColls[11].toString());
                     if (rescrimea == null) {
@@ -324,13 +327,26 @@ public class DbHandler {
                         comentary = "-";
                     }
 
-                    dateLoadFileXml = resultSet.getString(nameColls[13].toString());
+                    rescrimeaSimf = resultSet.getString(nameColls[13].toString());
+                    if (rescrimeaSimf == null) {
+                        rescrimeaSimf = "-";
+                    }
+                    comentarySimf = resultSet.getString(nameColls[14].toString());
+                    if (comentarySimf == null) {
+                        comentarySimf = "-";
+                    }
+
+                    dateLoadFileXml = resultSet.getString(nameColls[15].toString());
                     if (dateLoadFileXml == null) {
                         dateLoadFileXml = "-";
                     }
-                    dateLoadFileFromFfmsXls = resultSet.getString(nameColls[14].toString());
+                    dateLoadFileFromFfmsXls = resultSet.getString(nameColls[16].toString());
                     if (dateLoadFileFromFfmsXls == null) {
                         dateLoadFileFromFfmsXls = "-";
+                    }
+                    dateLoadFileFromFfmsXlsSimf = resultSet.getString(nameColls[17].toString());
+                    if (dateLoadFileFromFfmsXlsSimf == null) {
+                        dateLoadFileFromFfmsXlsSimf = "-";
                     }
                     employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
 
@@ -346,8 +362,11 @@ public class DbHandler {
                             new StringBuffer(city),
                             new StringBuffer(rescrimea),
                             new StringBuffer(comentary),
+                            new StringBuffer(rescrimeaSimf),
+                            new StringBuffer(comentarySimf),
                             new StringBuffer(dateLoadFileXml),
-                            new StringBuffer(dateLoadFileFromFfmsXls)
+                            new StringBuffer(dateLoadFileFromFfmsXls),
+                            new StringBuffer(dateLoadFileFromFfmsXlsSimf)
                     ).Builder());
                 }
 

@@ -100,10 +100,13 @@ public class Model {
         param.put("city","");
         param.put("resident_crimea","");
         param.put("commentary","");
+        param.put("resident_crimea_Simf","");
+        param.put("commentary_Simf","");
         param.put("DATE_LOAD_FILE_XML","");
         param.put("DATE_LOAD_FILE_FROM_FMS_XLS","");
+        param.put("DATE_LOAD_FILE_FROM_FMS_XLS_Simf","");
         List<Employee> employees = new LinkedList<Employee>();
-        employees = dbHandler.getEmployees("view_for_ocenka","snils",param);
+        employees = dbHandler.getEmployees("view_for_ocenka_with_simf","snils",param);
 //        Collections.sort(employees);
         return employees;
     }
@@ -123,6 +126,8 @@ public class Model {
         param.put("area","");
         param.put("region","");
         param.put("city","");
+        param.put("resident_crimea","");
+        param.put("commentary","");
         param.put("resident_crimea","");
         param.put("commentary","");
         param.put("DATE_LOAD_FILE_XML","");

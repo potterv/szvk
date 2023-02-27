@@ -12,8 +12,8 @@
   </parent>
 
   <groupId>ru.pfr.szvk</groupId>
-  <artifactId>szvk_test</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <artifactId>szvk</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
 <!--  <packaging>war</packaging>-->
 
   <name>szvk_web Maven Webapp</name>
@@ -28,9 +28,6 @@
     <poi.version>4.1.2</poi.version>
     <thymleaf.version>2.3.4.RELEASE</thymleaf.version>
   </properties>
-
-
-
 
   <dependencies>
     <dependency>

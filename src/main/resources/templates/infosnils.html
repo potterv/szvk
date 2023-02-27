@@ -78,24 +78,30 @@ Released   : 20131117
 		<br/>
     	<label class="control-label" >Признак резидентности на момент 18.03.2014 по данным ФМС Севастополя:</label>
 			<span th:utext="${ResidenceCrimea}"></span>
+    	<br/>
+			<label class="control-label" >Коментарий от Севастопольского ФМС:</label>
+			<span th:utext="${Commentary}"></span>
 		<br/>
 		<label class="control-label" >Признак резидентности на момент 18.03.2014 по данным ФМС Симферополя(Крыма):</label>
-			<span th:utext="${ResidenceCrimea}"></span>
-		<br/>
-		<label class="control-label" >Коментарий от Севастопольского ФМС:</label>
-			<span th:utext="${Commentary}"></span>
+			<span th:utext="${ResidenceCrimeaSimf}"></span>
 		<br/>
 			<label class="control-label" >Коментарий от Крымского ФМС:</label>
-			<span th:utext="${Commentary}"></span>
+			<span th:utext="${CommentarySimf}"></span>
 
 
 		<br/>
+			<label class="control-label" >дата загрузки xml файла и отправки в  ФМС:</label>
 			<span th:utext="${dateLoadFileXml}"></span>
-
-		<br/>
+        <br/>
+			<label class="control-label" >дата загрузки xls файла от Севастопольского ФМС:</label>
 			<span th:utext="${dateLoadFileFromFfmsXls}"></span>
-
-			<br/>
+    	<br/>
+			<label class="control-label" >дата загрузки xls файла от Крымского ФМС:</label>
+			<span th:utext="${dateLoadFileFromFfmsXlsSimf}"></span>
+		<br/>
+			<p>
+				<br/>
+			</p>
 			<label class="control-label" >Служебная информация:</label>
 		<br/>
 		<div height="30px">
