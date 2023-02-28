@@ -610,8 +610,8 @@ ul.style3 .first {
 		color: rgba(255,255,255,1);
 	}
 	span{
-	    margin: 2;
-        padding: 2;
-        text-size 14;
+	    margin: 2px;
+        padding: 2px;
+        text-size: 14;
         font-weight:bold;
 	}
